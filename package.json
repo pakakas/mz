@@ -1,0 +1,10 @@
+{
+  "name": "@pakakas/mz",
+  "version": "1.0.0",
+  "description": "Universal MarkZero viewer and inspector",
+  "main": "mz.ts",
+  "bin": {
+    "mz": "mz.ts"
+  },
+  "license": "ISC"
+}
