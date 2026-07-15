@@ -1,5 +1,5 @@
 import { decode, PROTO_ID } from "../../src/proto.ts";
-import { GRID_MARKER, COL_MARKER, ROW_MARKER, TITLE_MARKER, ROW_SEP as SEP_MARKER, KV_RELATION, GRID_REF } from "../markzero/src/util.ts";
+import { GRID_MARKER, COL_MARKER, ROW_MARKER, ROW_SEP as SEP_MARKER, KV_RELATION, GRID_REF } from "../markzero/src/util.ts";
 import { encode as encodeMacro } from "../../src/proto.ts";
 import { mergeHelp } from "../../src/help.ts";
 import { existsSync, readFileSync } from "node:fs";
@@ -41,14 +41,13 @@ function renderPrettyMZ(blocks: any[]): string {
     const GRID = CYAN(GRID_MARKER);
     const COL = YELLOW(COL_MARKER);
     const ROW = YELLOW(ROW_MARKER);
-    const TITLE = CYAN(TITLE_MARKER);
     const SEP = DIM(SEP_MARKER);
     const BINDER = DIM(KV_RELATION);
 
     let out = CYAN(PROTO_ID);
     
     blocks.forEach(block => {
-        if ((block as any).title) out += `\n${TITLE} ${(block as any).title}`;
+        if ((block as any).title) out += `\n${CYAN((block as any).title)}`;
         
         if (Array.isArray(block)) {
             if (block.length === 0) return;

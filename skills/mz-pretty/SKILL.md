@@ -10,10 +10,10 @@ MarkZero payloads can be rendered in a human-readable "pretty" format with inden
 ## Rules
 
 1. **Grid start** (`ⓖ`) on its own line, no indent
-2. **Rows** (`ʀ`) indented with 3 spaces after the first row
-3. **Column headers** (`ᴄ`) on the first row after `ⓖ`
+2. **Rows** (`→`) indented with 3 spaces after the first row
+3. **Column headers** (`§`) on the first row after `ⓖ`
 4. **Row separator** (`¦`) and **relation binder** (`→`) aligned with spaces
-5. **Title** (`★`) on its own line before the grid
+5. **Title** (optional) embedded between `ⓖ` and `§` on the grid start line
 6. **Protocol start** (`ⓟ`) on its own line
 7. **Grid refs** (`※`) and **value refs** (`¤`) unchanged
 
@@ -22,72 +22,68 @@ MarkZero payloads can be rendered in a human-readable "pretty" format with inden
 ### Map (Key-Value)
 **Compact:**
 ```
-ⓖ ʀ file → src/main.0 ʀ span → ※0
+ⓖ → file → src/main.0 → span → ※0
 ```
 **Pretty:**
 ```
-ⓖ ʀ file → src/main.0
-   ʀ span → ※0
+ⓖ → file → src/main.0
+   → span → ※0
 ```
 
 ### Table (Grid with Headers)
 **Compact:**
 ```
-ⓖ ᴄ type ¦ pos ¦ text ʀ insert ¦ 124 ¦ let
+ⓖ § type ¦ pos ¦ text → insert ¦ 124 ¦ let
 ```
 **Pretty:**
 ```
-ⓖ ᴄ type   ¦ pos ¦ text
-   ʀ insert ¦ 124 ¦ let
+ⓖ § type   ¦ pos ¦ text
+   → insert ¦ 124 ¦ let
 ```
 
 ### ToolCall (PAP)
 **Compact:**
 ```
-ⓟⓖ ʀ pattern → "const" ʀ files → ※0 ★ ToolCall ⓖ ʀ cmd → grep ʀ args → ※1
+ⓟⓖ → pattern → "const" → files → ※0 ⓖToolCall§ → cmd → grep → args → ※1
 ```
 **Pretty:**
 ```
 ⓟ
-ⓖ ʀ pattern → "const"
-   ʀ files   → ※0
-★ ToolCall
-ⓖ ʀ cmd  → grep
-   ʀ args → ※1
+ⓖ → pattern → "const"
+   → files   → ※0
+ⓖToolCall§ → cmd  → grep
+   → args → ※1
 ```
 
 ### ToolRegistry (PAP)
 **Pretty:**
 ```
 ⓟ
-ⓖ ʀ pattern τstr
-   ʀ files τset optional
-   ʀ flags τmap optional
+ⓖ → pattern τstr
+   → files τset optional
+   → flags τmap optional
 
-ⓖ ʀ directory τstr optional
+ⓖ → directory τstr optional
 
-★ Registry
-ⓖ ᴄ cmd  ¦ args ¦ returns
-   ʀ grep ¦ ※0   ¦ τgrid
-   ʀ ls   ¦ ※1   ¦ τgrid
+ⓖRegistry§ cmd  ¦ args ¦ returns
+   → grep ¦ ※0   ¦ τgrid
+   → ls   ¦ ※1   ¦ τgrid
 ```
 
 ### ToolResult
 **Pretty:**
 ```
 ⓟ
-★ Result
-ⓖ ᴄ file ¦ line ¦ text
-   ʀ a.ts ¦ 10   ¦ const x = 1
-   ʀ b.ts ¦ 42   ¦ const y = 2
+ⓖResult§ file ¦ line ¦ text
+   → a.ts ¦ 10   ¦ const x = 1
+   → b.ts ¦ 42   ¦ const y = 2
 ```
 
 ### Error Result
 **Pretty:**
 ```
 ⓟ
-★ Error
-ⓖ ʀ code → 404
+ⓖError→ code → 404
 ```
 
 ## Zero-Loss Guarantee
